@@ -51,14 +51,14 @@ FBJL_ = pd.read_csv('D:/data/A5FBJL_1.csv')  # LOG_COPY_ENDINFO
 FBRH_ = pd.read_csv('D:/data/A5FBRH_1.csv')  # LOG_FABAO_FUSION
 REGION_ = pd.read_csv('D:/data/A5region_1.csv')
 
-# FML_ = pd.read_csv('D:/data/A5FML_1.csv')# LOG_COPY_FML
-# TJCZ_ = pd.read_csv('D:/data/A5TJCZ_1.csv')# CHILDLOG_LOG_SKYBOOK_ADD_TIMES_23
-# ZBXM_ = pd.read_csv('D:/data/A5ZBXM_1.csv')# CHILDLOG_LOG_SKYBOOK_ADD_TIMES_86
+FML_ = pd.read_csv('D:/data/A5FML_1.csv')  # LOG_COPY_FML
+TJCZ_ = pd.read_csv('D:/data/A5TJCZ_1.csv')  # CHILDLOG_LOG_SKYBOOK_ADD_TIMES_23
+ZBXM_ = pd.read_csv('D:/data/A5ZBXM_1.csv')  # CHILDLOG_LOG_SKYBOOK_ADD_TIMES_86
 # GWWJ_ = pd.read_csv('D:/data/A5GWWJ_1.csv')# CHILDLOG_LOG_SKYBOOK_ADD_TIMES_73
-# CDYH_ = pd.read_csv('D:/data/A5CDYH_1.csv')# CHILDLOG_LOG_SKYBOOK_ADD_TIMES_69
-# MBMC_ = pd.read_csv('D:/data/A5MBMC_1.csv')# CHILDLOG_LOG_SKYBOOK_ADD_TIMES_5
-# FBXL_ = pd.read_csv('D:/data/A5FBXL_1.csv')# LOG_FABAO_REFINE
-
+CDYH_ = pd.read_csv('D:/data/A5CDYH_1.csv')  # CHILDLOG_LOG_SKYBOOK_ADD_TIMES_69
+MBMC_ = pd.read_csv('D:/data/A5MBMC_1.csv')  # CHILDLOG_LOG_SKYBOOK_ADD_TIMES_5
+FBXL_ = pd.read_csv('D:/data/A5FBXL_1.csv')  # LOG_FABAO_REFINE
+GX_ = pd.read_csv('D:/data/A5GX_1.csv')
 
 print('数据加载完毕')
 
@@ -237,35 +237,35 @@ final_data['dyFBJL'] = final_data['dyFBJL'] + 0
 final_data['isFBJL'] = final_data['FBJLCOUNT'] > 0
 final_data['isFBJL'] = final_data['isFBJL'] + 0
 
-# # 封魔录
-#
-# FML_ = FML_[FML_['u64_1'].isin(final_data['player_id'].tolist())]
-# FML_.rename(columns={'u64_1': 'player_id', 'count': 'FMLCOUNT'}, inplace=True)
-# final_data = final_data.join(FML_.set_index('player_id'), on='player_id', how='left')
-# final_data['dyFML'] = final_data['FMLCOUNT'] > final_data['FMLCOUNT'].mean(0)
-# final_data['dyFML'] = final_data['dyFML'] + 0
-# final_data['isFML'] = final_data['FMLCOUNT'] > 0
-# final_data['isFML'] = final_data['isFML'] + 0
-# # 天降彩珠
-#
-# TJCZ_ = TJCZ_[TJCZ_['u64_1'].isin(final_data['player_id'].tolist())]
-# TJCZ_.rename(columns={'u64_1': 'player_id', 'count': 'TJCZCOUNT'}, inplace=True)
-# final_data = final_data.join(TJCZ_.set_index('player_id'), on='player_id', how='left')
-# final_data['dyTJCZ'] = final_data['TJCZCOUNT'] > final_data['TJCZCOUNT'].mean(0)
-# final_data['dyTJCZ'] = final_data['dyTJCZ'] + 0
-# final_data['isTJCZ'] = final_data['TJCZCOUNT'] > 0
-# final_data['isTJCZ'] = final_data['isTJCZ'] + 0
-#
-# # 追捕邪魔
-#
-# ZBXM_ = ZBXM_[ZBXM_['u64_1'].isin(final_data['player_id'].tolist())]
-# ZBXM_.rename(columns={'u64_1': 'player_id', 'count': 'ZBXMCOUNT'}, inplace=True)
-# final_data = final_data.join(ZBXM_.set_index('player_id'), on='player_id', how='left')
-# final_data['dyZBXM'] = final_data['ZBXMCOUNT'] > final_data['ZBXMCOUNT'].mean(0)
-# final_data['dyZBXM'] = final_data['dyZBXM'] + 0
-# final_data['isZBXM'] = final_data['ZBXMCOUNT'] > 0
-# final_data['isZBXM'] = final_data['isZBXM'] + 0
-#
+# 封魔录
+
+FML_ = FML_[FML_['u64_1'].isin(final_data['player_id'].tolist())]
+FML_.rename(columns={'u64_1': 'player_id', 'count': 'FMLCOUNT'}, inplace=True)
+final_data = final_data.join(FML_.set_index('player_id'), on='player_id', how='left')
+final_data['dyFML'] = final_data['FMLCOUNT'] > final_data['FMLCOUNT'].mean(0)
+final_data['dyFML'] = final_data['dyFML'] + 0
+final_data['isFML'] = final_data['FMLCOUNT'] > 0
+final_data['isFML'] = final_data['isFML'] + 0
+# 天降彩珠
+
+TJCZ_ = TJCZ_[TJCZ_['u64_1'].isin(final_data['player_id'].tolist())]
+TJCZ_.rename(columns={'u64_1': 'player_id', 'count': 'TJCZCOUNT'}, inplace=True)
+final_data = final_data.join(TJCZ_.set_index('player_id'), on='player_id', how='left')
+final_data['dyTJCZ'] = final_data['TJCZCOUNT'] > final_data['TJCZCOUNT'].mean(0)
+final_data['dyTJCZ'] = final_data['dyTJCZ'] + 0
+final_data['isTJCZ'] = final_data['TJCZCOUNT'] > 0
+final_data['isTJCZ'] = final_data['isTJCZ'] + 0
+
+# 追捕邪魔
+
+ZBXM_ = ZBXM_[ZBXM_['u64_1'].isin(final_data['player_id'].tolist())]
+ZBXM_.rename(columns={'u64_1': 'player_id', 'count': 'ZBXMCOUNT'}, inplace=True)
+final_data = final_data.join(ZBXM_.set_index('player_id'), on='player_id', how='left')
+final_data['dyZBXM'] = final_data['ZBXMCOUNT'] > final_data['ZBXMCOUNT'].mean(0)
+final_data['dyZBXM'] = final_data['dyZBXM'] + 0
+final_data['isZBXM'] = final_data['ZBXMCOUNT'] > 0
+final_data['isZBXM'] = final_data['isZBXM'] + 0
+
 # # 怪物围剿
 #
 # GWWJ_ = GWWJ_[GWWJ_['u64_1'].isin(final_data['player_id'].tolist())]
@@ -276,35 +276,35 @@ final_data['isFBJL'] = final_data['isFBJL'] + 0
 # final_data['isGWWJ'] = final_data['GWWJCOUNT'] > 0
 # final_data['isGWWJ'] = final_data['isGWWJ'] + 0
 
-# # 超度游魂
-#
-# CDYH_ = CDYH_[CDYH_['u64_1'].isin(final_data['player_id'].tolist())]
-# CDYH_.rename(columns={'u64_1': 'player_id', 'count': 'CDYHCOUNT'}, inplace=True)
-# final_data = final_data.join(CDYH_.set_index('player_id'), on='player_id', how='left')
-# final_data['dyCDYH'] = final_data['CDYHCOUNT'] > final_data['CDYHCOUNT'].mean(0)
-# final_data['dyCDYH'] = final_data['dyCDYH'] + 0
-# final_data['isCDYH'] = final_data['CDYHCOUNT'] > 0
-# final_data['isCDYH'] = final_data['isCDYH'] + 0
-#
-# # 秘宝蒙尘
-#
-# MBMC_ = MBMC_[MBMC_['u64_1'].isin(final_data['player_id'].tolist())]
-# MBMC_.rename(columns={'u64_1': 'player_id', 'count': 'MBMCCOUNT'}, inplace=True)
-# final_data = final_data.join(MBMC_.set_index('player_id'), on='player_id', how='left')
-# final_data['dyMBMC'] = final_data['MBMCCOUNT'] > final_data['MBMCCOUNT'].mean(0)
-# final_data['dyMBMC'] = final_data['dyMBMC'] + 0
-# final_data['isMBMC'] = final_data['MBMCCOUNT'] > 0
-# final_data['isMBMC'] = final_data['isMBMC'] + 0
-#
-# # 法宝修炼
-#
-# FBXL_ = FBXL_[FBXL_['u64_1'].isin(final_data['player_id'].tolist())]
-# FBXL_.rename(columns={'u64_1': 'player_id', 'count': 'FBXLCOUNT'}, inplace=True)
-# final_data = final_data.join(FBXL_.set_index('player_id'), on='player_id', how='left')
-# final_data['dyFBXL'] = final_data['FBXLCOUNT'] > final_data['FBXLCOUNT'].mean(0)
-# final_data['dyFBXL'] = final_data['dyFBXL'] + 0
-# final_data['isFBXL'] = final_data['FBXLCOUNT'] > 0
-# final_data['isFBXL'] = final_data['isFBXL'] + 0
+# 超度游魂
+
+CDYH_ = CDYH_[CDYH_['u64_1'].isin(final_data['player_id'].tolist())]
+CDYH_.rename(columns={'u64_1': 'player_id', 'count': 'CDYHCOUNT'}, inplace=True)
+final_data = final_data.join(CDYH_.set_index('player_id'), on='player_id', how='left')
+final_data['dyCDYH'] = final_data['CDYHCOUNT'] > final_data['CDYHCOUNT'].mean(0)
+final_data['dyCDYH'] = final_data['dyCDYH'] + 0
+final_data['isCDYH'] = final_data['CDYHCOUNT'] > 0
+final_data['isCDYH'] = final_data['isCDYH'] + 0
+
+# 秘宝蒙尘
+
+MBMC_ = MBMC_[MBMC_['u64_1'].isin(final_data['player_id'].tolist())]
+MBMC_.rename(columns={'u64_1': 'player_id', 'count': 'MBMCCOUNT'}, inplace=True)
+final_data = final_data.join(MBMC_.set_index('player_id'), on='player_id', how='left')
+final_data['dyMBMC'] = final_data['MBMCCOUNT'] > final_data['MBMCCOUNT'].mean(0)
+final_data['dyMBMC'] = final_data['dyMBMC'] + 0
+final_data['isMBMC'] = final_data['MBMCCOUNT'] > 0
+final_data['isMBMC'] = final_data['isMBMC'] + 0
+
+# 法宝修炼
+
+FBXL_ = FBXL_[FBXL_['u64_1'].isin(final_data['player_id'].tolist())]
+FBXL_.rename(columns={'u64_1': 'player_id', 'count': 'FBXLCOUNT'}, inplace=True)
+final_data = final_data.join(FBXL_.set_index('player_id'), on='player_id', how='left')
+final_data['dyFBXL'] = final_data['FBXLCOUNT'] > final_data['FBXLCOUNT'].mean(0)
+final_data['dyFBXL'] = final_data['dyFBXL'] + 0
+final_data['isFBXL'] = final_data['FBXLCOUNT'] > 0
+final_data['isFBXL'] = final_data['isFBXL'] + 0
 
 # 法宝融合
 
@@ -315,6 +315,14 @@ final_data['dyFBRH'] = final_data['FBRHCOUNT'] > final_data['FBRHCOUNT'].mean(0)
 final_data['dyFBRH'] = final_data['dyFBRH'] + 0
 final_data['isFBRH'] = final_data['FBRHCOUNT'] > 0
 final_data['isFBRH'] = final_data['isFBRH'] + 0
+
+GX_ = GX_[GX_['u64_1'].isin(final_data['player_id'].tolist())]
+GX_.rename(columns={'u64_1': 'player_id', 'count': 'GXCOUNT'}, inplace=True)
+final_data = final_data.join(GX_.set_index('player_id'), on='player_id', how='left')
+final_data['dyGX'] = final_data['GXCOUNT'] > final_data['GXCOUNT'].mean(0)
+final_data['dyGX'] = final_data['dyGX'] + 0
+final_data['isGX'] = final_data['GXCOUNT'] > 0
+final_data['isGX'] = final_data['isGX'] + 0
 
 # 帮贡
 final_data[final_data['banggong'] > 0]['banggong'].hist(bins=100)

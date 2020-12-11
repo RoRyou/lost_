@@ -26,28 +26,29 @@ MAXDEPTH =4
 MINSAMPLESSPLIT =1
 
 
-df1 = pd.read_csv('D:/data/A7更新次留所有人(8).csv')
 
-df = df1
+df = pd.read_csv('D:/data/final_data_8.csv')
 
-for col in ['角色', 'isparty', 'ispvp', 'isforge',
-       '玩家地区',       'whether_have_any_duanzao_+5', 'istianshu', 'dyLMZ', 'isxianmen',
-       'dyxianmen', 'isLYQ', 'dyLYQ', 'isKTT', 'dyKTT', 'isXMHJ', 'dyXMHJ',
-       'isSYZC', 'dySYZC', 'isPTY', 'dyPTY', 'isFB', 'dyFB', 'isRHFB',
-       'dyRHFB']:
-    le_hot = OneHotEncoder(sparse=False)
-    hot_feature_arr = le_hot.fit_transform(df[[col]])
 
-    hot_features = pd.DataFrame(hot_feature_arr)
-
-    del df[col]
-
-    hot_features.columns = le_hot.get_feature_names([col])
-
-    # print (hot_features)
-
-    df = pd.concat([df, hot_features], axis=1)
-
+# for col in ['isparty', 'dyLMZ', 'isLMZ', 'dyXMSL', 'isXMSL', 'dyLYQ',
+#        'isLYQ', 'dyKTT', 'isKTT', 'dyXMHJ', 'isXMHJ', 'dySYZC', 'isSYZC',
+#        'dyPTY', 'isPTY', 'dyFBJL', 'isFBJL', 'dyFBRH', 'isFBRH', 'dybanggong',
+#        'dyfee', 'isfee', 'dyForge_time', 'dyrate', 'dykilltimes',
+#        'dykilledtimes']:
+#     le_hot = OneHotEncoder(sparse=False)
+#     hot_feature_arr = le_hot.fit_transform(df[[col]])
+#
+#     hot_features = pd.DataFrame(hot_feature_arr)
+#
+#     del df[col]
+#
+#     hot_features.columns = le_hot.get_feature_names([col])
+#
+#     # print (hot_features)
+#
+#     df = pd.concat([df, hot_features], axis=1)
+#
+#
 
 
 
@@ -92,17 +93,17 @@ feature_col_list = df.columns.tolist()
 #print(feature_col_list)
 del feature_col_list[0]
 
-print(len(df.columns))
+
 
 
 
 train, test = train_test_split(df, test_size=DATASPLITRATE, random_state=111)
 
 X_train = train[feature_col_list]
-y_train = train['churn']
+y_train = train['LOST']
 
 X_test = test[feature_col_list]
-y_test = test['churn']
+y_test = test['LOST']
 
 clf = tree.DecisionTreeClassifier(max_depth=MAXDEPTH)
 # clf = tree.DecisionTreeClassifier(max_depth=MAXDEPTH,min_impurity_decrease=MINIMPURITYDECRESASE)
@@ -110,35 +111,16 @@ clf = tree.DecisionTreeClassifier(max_depth=MAXDEPTH)
 clf = clf.fit(X_train, y_train)
 pred = clf.predict(X_test)
 
-# print(classification_report(y_test, pred))
-# print('------------')
-# print(metrics.f1_score(y_test, pred))
-
-
-
-
-
-train, test = train_test_split(df, test_size=DATASPLITRATE, random_state=111)
-
-X_train = train[feature_col_list]
-y_train = train['churn']
-
-X_test = test[feature_col_list]
-y_test = test['churn']
-
-clf = tree.DecisionTreeClassifier(max_depth=MAXDEPTH)
-#clf = tree.DecisionTreeClassifier(max_depth=MAXDEPTH,min_impurity_decrease=MINIMPURITYDECRESASE)
-
-
-
-clf = clf.fit(X_train, y_train)
-pred = clf.predict(X_test)
-
-#print(classification_report(y_test, pred))
+print(classification_report(y_test, pred))
 print('------------')
-print(metrics.f1_score(y_test,pred))
+print(metrics.f1_score(y_test, pred))
 
-for feat, importance in zip(X_train.columns, clf.feature_importances_):
+
+
+
+
+
+for feat, importance in zip(feature_col_list, clf.feature_importances_):
     if importance > 0:
         print('feature: {f}, importance: {i}'.format(f=feat, i=importance))
 
@@ -184,13 +166,14 @@ model.fit(X, y)
 importance = model.coef_
 # summarize feature importance
 for i,v in enumerate(importance):
-    print('Feature:' ,feature_col_list[int(i)], 'Score: %.5f' % ( v))
+    print('Feature:' ,feature_col_list[int(i)], 'Score: %.2f' % ( v*100))
 
 
 
 # plot feature importance
 plt.bar([x for x in range(len(importance))], importance)
-plt.title('linear regression feature importance')
+
+#plt.title('linear regression feature importance')
 plt.show()
 
 print(len(feature_col_list))
@@ -211,10 +194,10 @@ importance = model.coef_[0]
 # summarize feature importance
 LRI=[]
 for i,v in enumerate(importance):
-    print('Feature:' ,feature_col_list[int(i)], 'Score: %.5f' % ( v))
+    print('Feature:' ,feature_col_list[int(i)], 'Score: %.2f' % ( v*100))
     LRI.append([feature_col_list[int(i)] , v])
 # plot feature importance
-plt.title('logistic regression for feature importance')
+#plt.title('logistic regression for feature importance')
 pyplot.bar([x for x in range(len(importance))], importance)
 pyplot.show()
 
@@ -234,9 +217,9 @@ model.fit(X, y)
 importance = model.feature_importances_
 # summarize feature importance
 for i,v in enumerate(importance):
-    print('Feature:' ,feature_col_list[int(i)], 'Score: %.5f' % ( v))
+    print('Feature:' ,feature_col_list[int(i)], 'Score: %.2f' % ( v*100))
 # plot feature importance
-plt.title('decision tree for feature importance on a regression problem')
+#plt.title('decision tree for feature importance on a regression problem')
 pyplot.bar([x for x in range(len(importance))], importance)
 pyplot.show()
 
@@ -257,9 +240,9 @@ model.fit(X, y)
 importance = model.feature_importances_
 # summarize feature importance
 for i,v in enumerate(importance):
-    print('Feature:' ,feature_col_list[int(i)], 'Score: %.5f' % ( v))
+    print('Feature:' ,feature_col_list[int(i)], 'Score: %.2f' % ( v*100))
 # plot feature importance
-plt.title('decision tree for feature importance on a classification problem')
+#plt.title('decision tree for feature importance on a classification problem')
 pyplot.bar([x for x in range(len(importance))], importance)
 pyplot.show()
 
