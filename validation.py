@@ -64,7 +64,7 @@ print('------------')
 ACT_lists=['isparty', 'isXMSL','isLYQ', 'isKTT','isXMHJ','isSYZC','isPTY','isFBJL','isFBRH','dyLMZ', 'dyXMSL',  'dyLYQ', 'dyKTT',  'dyXMHJ',  'dySYZC', 'dyPTY',  'dyFBJL',  'dyFBRH',  'dybanggong','dyfee', 'isfee', 'dyForge_time', 'dyrate', 'dykilltimes','dykilledtimes']
 for ACT in ACT_lists:
     dict = {}
-    for key in df10[df10[ACT] == 0]['LOST'].tolist():
+    for key in df5[df5[ACT] == 0]['LOST'].tolist():
         dict[key] = dict.get(key, 0) + 1
     if dict[1] == dict[0] + dict[1]:
         print('所有人都参与了该活动')
@@ -73,7 +73,7 @@ for ACT in ACT_lists:
         print("%.2f%%" %(dict[1]/(dict[0]+dict[1])))
 
     dict = {}
-    for key in df10[df10[ACT] == 1]['LOST'].tolist():
+    for key in df5[df5[ACT] == 1]['LOST'].tolist():
         dict[key] = dict.get(key, 0) + 1
     if dict[1] == dict[0] + dict[1]:
         print('所有人都参与了该活动')
